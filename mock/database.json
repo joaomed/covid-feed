@@ -2,11 +2,8 @@
   "posts": [
     {
       "id": 1,
-      "nome": "João"
-    },
-    {
-      "id": 2,
-      "nome": "Tati"
+      "content": "asdasd",
+      "countryId": 1
     }
   ]
 }
