@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import { SelectChangeEvent } from '@mui/material/Select'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select, { SelectChangeEvent } from '@mui/material/Select'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import { Box } from '@mui/material'
-import { CountryData } from '../../types'
+import { CountryData, iPostData } from '../../types'
 import { thousandPointFormat } from '../../helpers'
 import {
   ArrowFooter,
@@ -11,49 +13,43 @@ import {
   FooterCard,
   HeaderCard
 } from './styles'
+import ClearIcon from '@mui/icons-material/Clear'
 import LinearProgress from '@mui/material/LinearProgress'
-import { SelectCountries } from '../SelectCountries'
 
-export const Recovered = (props: {
-  recovereds?: number
-  countriesData: CountryData[] | null
-  loading: boolean
+export const AllPosts = (props: { 
+  posts: iPostData[]
 }) => {
   const [recoveredsCount, setRecoveredsCount] = useState(
     0 as number | undefined
   )
   const [country, setCountry] = useState('Global')
-
-  useEffect(() => {
-    setRecoveredsCount(props?.recovereds)
-  }, [props.recovereds])
-
-  const handleChangeCountry = (event: SelectChangeEvent) => {
-    setCountry(event.target.value)
-    if (event.target.value === 'Global') {
-      clearSelect()
-    } else if (props.countriesData) {
-      const countryInfo = props.countriesData.find(
-        item => item.country === event.target.value
-      )
-      setRecoveredsCount(countryInfo?.recovered)
-    }
-  }
-
-  const clearSelect = () => {
-    setRecoveredsCount(props.recovereds)
-    setCountry('Global')
-  }
+  
 
   return (
     <Box>
-      <ContainerCard>
+      {/* <ContainerCard>
         <HeaderCard>
           <div>
             <RemoveRedEyeOutlinedIcon />
             Recovered
           </div>
-          <SelectCountries handleChangeCountry={handleChangeCountry} clearSelect={clearSelect} loading={props.loading} country={country}/>
+          <div>
+            <FormControl variant="standard" sx={{ minWidth: 100 }}>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+                value={country}
+                onChange={handleChangeCountry}
+                disabled={props.loading}
+              >
+                <MenuItem value={'Global'}>Global</MenuItem>
+                {props.countriesList.map(item => {
+                  return <MenuItem value={item}>{item}</MenuItem>
+                })}
+              </Select>
+            </FormControl>
+            <ClearIcon onClick={clearSelect} />
+          </div>
         </HeaderCard>
         <BodyCard>
           {props.loading ? (
@@ -73,7 +69,7 @@ export const Recovered = (props: {
           <ArrowFooter />
         </FooterCard>
       </ContainerCard>
-      <Box></Box>
+      <Box></Box> */}
     </Box>
   )
 }

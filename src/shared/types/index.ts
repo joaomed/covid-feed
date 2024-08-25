@@ -47,3 +47,19 @@ export type CountryData = {
   updated: number
 }
 
+export interface iPostData {
+  id: number
+  content: string
+  countryId: number
+}
+
+export interface iPostDataPost {
+  content: string
+  countryId: number
+}
+
+export type ResponsePostsPage = {
+  data: iPostData[]
+  totalCount: number
+}
+

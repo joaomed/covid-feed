@@ -1,25 +1,30 @@
+import { iPostData, iPostDataPost, ResponsePostsPage } from '../../../types'
 import { Api } from '../axios-config'
 
-interface iPostData {
-  id: number
-  content: string
-  countryId: number
-}
+const getAll = async (
+  page = 1,
+  filter = ''
+): Promise<iPostData[] | Error> => {
+  try {
+    const urlString = `/posts`
+    const { data } = await Api.get(urlString)
 
-interface iPostDataPost {
-  content: string
-  countryId: number
+    if (data) {
+      return data
+      
+    }
+    return new Error('Error in getTop posts')
+  } catch (error) {
+    console.error(error)
+    return new Error(
+      (error as { message: string }).message || 'Error in getTop posts'
+    )
+  }
 }
-
-type ResponsePosts = {
-  data: iPostData[]
-  totalCount: number
-}
-
 const getTop = async (
   page = 1,
   filter = ''
-): Promise<ResponsePosts | Error> => {
+): Promise<ResponsePostsPage | Error> => {
   try {
     const urlString = `/posts?_page=1&_limit=3&countryId_like=${filter}`
     const { data, headers } = await Api.get(urlString)
@@ -90,4 +95,4 @@ const deleteById = async (id:number): Promise<void | Error> => {
  }
 }
 
-export const PostsService = { getTop, getById, create, updateById, deleteById }
+export const PostsService = { getAll, getTop, getById, create, updateById, deleteById }
