@@ -2,6 +2,20 @@ import {createTheme} from '@mui/material'
 import { blue, cyan } from '@mui/material/colors'
 
 export const LightTheme = createTheme({
+  typography: {
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  },
   palette:{
     primary: {
       main: blue[700],
