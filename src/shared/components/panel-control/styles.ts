@@ -4,7 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export const ContainerCard = styled(Box)({
   height: '180px',
-  width: '300px',
+  width: '320px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -19,9 +19,16 @@ export const ContainerCard = styled(Box)({
 export const HeaderCard = styled(Box)({
   display: 'flex',
   alignItems: 'center',
-  gap: '5px',
   fontWeight: 500,
-  fontSize: '16px'
+  fontSize: '16px',
+  justifyContent: 'space-between',
+  div: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  '& > div:first-of-type': {
+    gap: '5px',
+  }
 
 })
 
