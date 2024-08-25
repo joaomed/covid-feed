@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react'
-import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import { Box } from '@mui/material'
-import axios from 'axios'
-import { CountryData, TotalData } from '../../types'
+import { CountryData } from '../../types'
 import { thousandPointFormat } from '../../helpers'
 import {
   ArrowFooter,
@@ -16,11 +14,13 @@ import {
   HeaderCard
 } from './styles'
 import ClearIcon from '@mui/icons-material/Clear'
+import LinearProgress from '@mui/material/LinearProgress';
 
 export const ConfirmedCases = (props: {
   countriesList: string[]
   confirmedCases?: number
   countriesData: CountryData[] | null
+  loading: boolean
 }) => {
   const [confirmedCasesCount, setConfirmedCasesCount] = useState(
     0 as number | undefined
@@ -63,6 +63,7 @@ export const ConfirmedCases = (props: {
                 id="demo-simple-select-standard"
                 value={country}
                 onChange={handleChangeCountry}
+                disabled={props.loading}
               >
                 <MenuItem value={'Global'}>Global</MenuItem>
                 {props.countriesList.map(item => {
@@ -73,7 +74,13 @@ export const ConfirmedCases = (props: {
             <ClearIcon onClick={clearSelect} />
           </div>
         </HeaderCard>
-        <BodyCard> {thousandPointFormat(confirmedCasesCount)}</BodyCard>
+        <BodyCard>
+          {props.loading ? (
+            <LinearProgress />
+          ) : (
+            thousandPointFormat(confirmedCasesCount)
+          )}
+        </BodyCard>
         <FooterCard>
           <a
             target="_blank"

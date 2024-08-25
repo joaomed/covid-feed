@@ -16,11 +16,13 @@ import {
   HeaderCard
 } from './styles'
 import ClearIcon from '@mui/icons-material/Clear'
+import LinearProgress from '@mui/material/LinearProgress'
 
 export const Deaths = (props: {
   countriesList: string[]
   deaths?: number
   countriesData: CountryData[] | null
+  loading: boolean
 }) => {
   const [deathsCount, setDeathsCount] = useState(0 as number | undefined)
   const [country, setCountry] = useState('Global')
@@ -61,6 +63,7 @@ export const Deaths = (props: {
                 id="demo-simple-select-standard"
                 value={country}
                 onChange={handleChangeCountry}
+                disabled={props.loading}
               >
                 <MenuItem value={'Global'}>Global</MenuItem>
                 {props.countriesList.map(item => {
@@ -68,10 +71,16 @@ export const Deaths = (props: {
                 })}
               </Select>
             </FormControl>
-            <ClearIcon onClick={clearSelect}/>
+            <ClearIcon onClick={clearSelect} />
           </div>
         </HeaderCard>
-        <BodyCard> {thousandPointFormat(deathsCount)}</BodyCard>
+        <BodyCard>
+          {props.loading ? (
+            <LinearProgress />
+          ) : (
+            thousandPointFormat(deathsCount)
+          )}
+        </BodyCard>
         <FooterCard>
           <a
             target="_blank"
