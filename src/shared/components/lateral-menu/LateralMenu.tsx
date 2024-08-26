@@ -10,7 +10,10 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
+import HomeIcon from '@mui/icons-material/Home';
+import AirplayIcon from '@mui/icons-material/Airplay';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
+import StarIcon from '@mui/icons-material/Star';
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -52,13 +55,13 @@ export const LateralMenu: React.FC<ComponentProps> = ({ children }) => {
   function getIcon(label: string) {
     switch (label) {
       case 'Home':
-        return <InboxIcon />
+        return <HomeIcon />
       case 'Panel Control':
-        return <InboxIcon />
+        return <AirplayIcon />
       case 'Feed':
-        return <InboxIcon />
+        return <DynamicFeedIcon />
       case 'TrustPilot':
-        return <InboxIcon />
+        return <StarIcon />
       default:
         return <></>
     }
