@@ -1,4 +1,3 @@
-import { Image } from '@mui/icons-material'
 import { Box } from '@mui/material'
 
 export const Home = () => {
@@ -10,7 +9,7 @@ export const Home = () => {
       width="100%"
       height="100%"
     >
-      <Box display="flex" gap="20px" alignItems="end" position="relative" right="300px">
+      <Box display="flex" gap="20px" alignItems="end" position="relative" right="60px" marginLeft="70px">
         <img src="./public/favicon.png" alt="logo" />
         <Box justifySelf="end">
           <Box fontSize="28px" fontWeight="700" fontFamily="-apple-system">

@@ -10,10 +10,10 @@ import {
   useMediaQuery,
   useTheme
 } from '@mui/material'
-import HomeIcon from '@mui/icons-material/Home';
-import AirplayIcon from '@mui/icons-material/Airplay';
-import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
-import StarIcon from '@mui/icons-material/Star';
+import HomeIcon from '@mui/icons-material/Home'
+import AirplayIcon from '@mui/icons-material/Airplay'
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed'
+import StarIcon from '@mui/icons-material/Star'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -22,16 +22,12 @@ type ComponentProps = {
 }
 
 interface iListItemLinkProps {
-  to: string 
+  to: string
   icon: JSX.Element
   label: string
 }
 
-const ListItemLink: React.FC<iListItemLinkProps> = ({
-  to,
-  icon,
-  label,
-}) => {
+const ListItemLink: React.FC<iListItemLinkProps> = ({ to, icon, label }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -50,7 +46,7 @@ const ListItemLink: React.FC<iListItemLinkProps> = ({
 
 export const LateralMenu: React.FC<ComponentProps> = ({ children }) => {
   const theme = useTheme()
-  const navigate = useNavigate()
+  const mdDown = useMediaQuery(theme.breakpoints.down('md'))
 
   function getIcon(label: string) {
     switch (label) {
@@ -82,26 +78,26 @@ export const LateralMenu: React.FC<ComponentProps> = ({ children }) => {
     }
   }
 
-  const smDown = useMediaQuery(theme.breakpoints.down('sm'));
   return (
     <>
-      <Drawer open variant={smDown ? 'temporary' : 'permanent'}>
-        <Box width={theme.spacing(28)} display="flex">
-          <Divider />
-          <List>
-            {['Home', 'Panel Control', 'Feed', 'TrustPilot'].map(
-              (text, index) => (
-                <ListItemLink 
-                label={text}
-                to={getTo(text)}
-                icon={getIcon(text)}
-                />
-              )
-            )}
-          </List>
-        </Box>
-      </Drawer>
-      <Box height="100vh" marginLeft={theme.spacing(28)}>
+        <Drawer open variant="persistent">
+          <Box width={mdDown ? '50px' : theme.spacing(28)} display="flex" alignItems={mdDown ? 'right' : "left"}>
+            <Divider />
+            <List>
+              {['Home', 'Panel Control', 'Feed', 'TrustPilot'].map(
+                (text, index) => (
+                  <ListItemLink
+                    label={text}
+                    to={getTo(text)}
+                    icon={getIcon(text)}
+                  />
+                )
+              )}
+            </List>
+          </Box>
+        </Drawer>
+        
+      <Box height="100vh" marginLeft={mdDown ? '50px' : theme.spacing(28)}>
         {children}
       </Box>
     </>

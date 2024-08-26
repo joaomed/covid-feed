@@ -3,7 +3,7 @@ import { AppRoutes } from './routes'
 import { ThemeProvider } from '@emotion/react'
 import { LightTheme } from './shared/themes'
 import { Header, LateralMenu } from './shared/components'
-import { CssBaseline } from '@mui/material'
+import { CssBaseline, useMediaQuery } from '@mui/material'
 
 export const App = () => {
   return (
