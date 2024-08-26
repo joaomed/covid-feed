@@ -71,7 +71,6 @@ export const Deaths = (props: {
           <ArrowFooter />
         </FooterCard>
       </ContainerCard>
-      <Box></Box>
     </Box>
   )
 }

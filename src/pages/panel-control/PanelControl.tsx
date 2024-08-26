@@ -31,10 +31,6 @@ export const PanelControl = () => {
     fetchData()
   }, [])
 
-  const teste = [] as {country: string, iso: string}[]
-  countriesData?.map((item) => { teste.push({country:item.country, iso: item.countryInfo.iso2})})
-  console.log("teste", teste)
-
   return (
     <Box display='flex' position='relative' bottom='20px' alignItems='center' justifyContent='center' gap='20px' >
       <ConfirmedCases  confirmedCases={totalData?.cases} countriesData={countriesData} loading={isLoading}/>

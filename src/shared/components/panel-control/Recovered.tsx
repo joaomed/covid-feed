@@ -73,7 +73,6 @@ export const Recovered = (props: {
           <ArrowFooter />
         </FooterCard>
       </ContainerCard>
-      <Box></Box>
     </Box>
   )
 }

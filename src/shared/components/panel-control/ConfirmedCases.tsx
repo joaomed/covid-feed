@@ -73,7 +73,6 @@ export const ConfirmedCases = (props: {
           <ArrowFooter />
         </FooterCard>
       </ContainerCard>
-      <Box></Box>
     </Box>
   )
 }

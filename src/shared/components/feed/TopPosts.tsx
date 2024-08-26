@@ -8,8 +8,8 @@ import {
   ContainerCard,
   FooterCard,
   HeaderCard,
-  Post,
-  PostContainer
+  PostContainer,
+  PostTop
 } from './styles'
 
 export const TopPosts = (props: { posts: iPostData[] }) => {
@@ -34,14 +34,12 @@ export const TopPosts = (props: { posts: iPostData[] }) => {
       .sort((a, b) => b[1] - a[1])
       .slice(0, 3); 
   
-    console.log("sorted",sortedCountries)
     return sortedCountries;
-
   }
 
   return (
     <Box>
-      <ContainerCard height="180px" width='320px'>
+      <ContainerCard height="180px" width='600px'>
         <HeaderCard>
           <div>
             <ListIcon />
@@ -53,8 +51,8 @@ export const TopPosts = (props: { posts: iPostData[] }) => {
           {topPosts.map(item => {
             return (
               <PostContainer>
-                <Post>{item[0]}</Post>
-                {item[1]}
+                <PostTop>{item[0]}</PostTop>
+                <Box fontSize="14px">{item[1]}</Box>
               </PostContainer>
             )
           })}
@@ -62,12 +60,11 @@ export const TopPosts = (props: { posts: iPostData[] }) => {
         <FooterCard>
           <a
             target="_blank"
-            href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public#:~:text=Avoid%20crowds%20and%20close%20contact,when%20you%20cough%20or%20sneeze."
+            href="https://silsistemas.com.br/"
             rel="noreferrer"
           >
-            Learn how to prevent infections
+            Do you want more visits? Contact us!
           </a>
-          <ArrowFooter />
         </FooterCard>
       </ContainerCard>
       <Box></Box>

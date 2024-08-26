@@ -41,7 +41,7 @@ export const AllPosts = (props: { posts: iPostData[] }) => {
 
   return (
     <Box>
-      <ContainerCard>
+      <ContainerCard width="600px">
         <HeaderCard>
           <div>
             <ListIcon />
@@ -69,16 +69,7 @@ export const AllPosts = (props: { posts: iPostData[] }) => {
             )
           })}
         </BodyCard>
-        <FooterCard>
-          <a
-            target="_blank"
-            href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public#:~:text=Avoid%20crowds%20and%20close%20contact,when%20you%20cough%20or%20sneeze."
-            rel="noreferrer"
-          >
-            Learn how to prevent infections
-          </a>
-          <ArrowFooter />
-        </FooterCard>
+     
       </ContainerCard>
     </Box>
   )
