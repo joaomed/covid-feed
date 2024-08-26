@@ -2,6 +2,17 @@ import {createTheme} from '@mui/material'
 import { blue, cyan } from '@mui/material/colors'
 
 export const LightTheme = createTheme({
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          margin: 0,
+          padding: 0,
+          boxSizing: 'border-box'
+        },
+      },
+    },
+  },
   typography: {
     fontFamily: [
       '-apple-system',
@@ -31,8 +42,7 @@ export const LightTheme = createTheme({
     },
     background: {
       default: '#F8F9FB',
-      paper: '#fff',
+      paper: '#FFF',
     }
   }
-
 })

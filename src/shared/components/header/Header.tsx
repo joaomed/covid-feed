@@ -1,10 +1,12 @@
-import { Image } from '@mui/icons-material'
 import { Box } from '@mui/material'
+import { Logo } from '../../../assets/Logo'
 
 export const Header = () => {
   return (
-    <Box height='50px' bgcolor='#63B3ED' >
-      
+    <Box height="120px" bgcolor="#A3DFFA">
+      <Box paddingLeft='30px'>
+        <Logo />
+      </Box>
     </Box>
   )
 }
