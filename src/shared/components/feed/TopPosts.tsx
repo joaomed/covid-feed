@@ -1,41 +1,63 @@
 import { useEffect, useState } from 'react'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
-import { Box } from '@mui/material'
-import { CountryData } from '../../types'
-import { thousandPointFormat } from '../../helpers'
+import {  Box } from '@mui/material'
+import {  iPostData } from '../../types'
+import ListIcon from '@mui/icons-material/List'
 import {
   ArrowFooter,
   BodyCard,
   ContainerCard,
   FooterCard,
-  HeaderCard
+  HeaderCard,
+  Post,
+  PostContainer
 } from './styles'
-import ClearIcon from '@mui/icons-material/Clear'
-import LinearProgress from '@mui/material/LinearProgress';
 
-export const TopPosts = (props: {
+export const TopPosts = (props: { posts: iPostData[] }) => {
+  const [topPosts, setTopPosts] = useState([] as [string, number][])
 
-}) => {
+  useEffect(() => {
+    setTopPosts(handleTopCountriesWithPosts())
+  }, [props.posts])
+
+  function handleTopCountriesWithPosts(): [string, number][] {
+    const countryCounts: { [country: string]: number } = {};
+    props.posts.forEach(post => {
+      const country = post.country;
+      if (countryCounts[country]) {
+        countryCounts[country]++;
+      } else {
+        countryCounts[country] = 1;
+      }
+    });
   
+    const sortedCountries: [string, number][] = Object.entries(countryCounts)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3); 
+  
+    console.log("sorted",sortedCountries)
+    return sortedCountries;
+
+  }
+
   return (
     <Box>
-      {/* <ContainerCard>
+      <ContainerCard height="180px" width='320px'>
         <HeaderCard>
           <div>
-            <RemoveRedEyeOutlinedIcon />
+            <ListIcon />
             Top posts
           </div>
 
         </HeaderCard>
         <BodyCard>
-          {props.loading ? (
-            <LinearProgress />
-          ) : (
-            thousandPointFormat(confirmedCasesCount)
-          )}
+          {topPosts.map(item => {
+            return (
+              <PostContainer>
+                <Post>{item[0]}</Post>
+                {item[1]}
+              </PostContainer>
+            )
+          })}
         </BodyCard>
         <FooterCard>
           <a
@@ -48,7 +70,7 @@ export const TopPosts = (props: {
           <ArrowFooter />
         </FooterCard>
       </ContainerCard>
-      <Box></Box> */}
+      <Box></Box>
     </Box>
   )
 }

@@ -1,10 +1,9 @@
 import { styled } from '@mui/material/styles'
-import { Box } from '@mui/material'
+import { Avatar, Box } from '@mui/material'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 export const ContainerCard = styled(Box)({
-  height: '180px',
-  width: '320px',
+  width: '600px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
@@ -33,8 +32,13 @@ export const HeaderCard = styled(Box)({
 })
 
 export const BodyCard = styled(Box)({
+  display: 'flex',
+  flexDirection: 'column',
+  marginBlock: '20px',
+  gap: '5px',
   fontWeight: 500,
-  fontSize: '30px'
+  fontSize: '14px',
+  
 })
 
 export const FooterCard = styled(Box)({
@@ -51,4 +55,18 @@ export const FooterCard = styled(Box)({
 export const ArrowFooter = styled(ArrowForwardIcon)({
   color: '#41BCF9',
   width: '18px'
+})
+
+export const PostContainer = styled(Box)({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+})
+
+export const Post = styled(Box)({
+  fontSize: '14px'
+}) 
+
+export const IconPost = styled(Avatar)({
+  fontSize: '10px'
 })

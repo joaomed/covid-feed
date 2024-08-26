@@ -29,6 +29,9 @@ export type CountryData = {
   casesPerOneMillion: number
   continent: string
   country: string
+  countryInfo: {
+    iso2: string
+  }
   critical: number
   criticalPerOneMillion: number
   deaths: number
@@ -50,12 +53,14 @@ export type CountryData = {
 export interface iPostData {
   id: number
   content: string
-  countryId: number
+  country: string
+  iso: string
 }
 
 export interface iPostDataPost {
   content: string
-  countryId: number
+  country: string
+  iso: string
 }
 
 export type ResponsePostsPage = {

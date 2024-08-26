@@ -1,7 +1,8 @@
 import { Api } from '../axios-config'
 
-const getAll = async (
-): Promise<string[] | Error> => {
+const getAll = async (): Promise<
+  { label: string; iso: string }[] | Error
+> => {
   try {
     const urlString = `/countries`
     const { data } = await Api.get(urlString)
@@ -17,7 +18,5 @@ const getAll = async (
     )
   }
 }
-
-
 
 export const CountriesService = { getAll }

@@ -3,7 +3,6 @@ import { Box } from '@mui/material'
 import axios from 'axios'
 import { CountryData, TotalData } from '../../shared/types'
 import { ConfirmedCases, Deaths, Recovered } from '../../shared/components'
-import { CountriesService } from '../../shared/services/api/Countries/CountriesService'
 
 export const PanelControl = () => {
   const [totalData, setTotalData] = useState(null as TotalData | null)
@@ -23,7 +22,7 @@ export const PanelControl = () => {
         )
         setTotalData(totalData.data)
         setCountriesData(countriesData.data)
-        // handleCountriesList(countriesData.data)
+        
       } catch (err) {
         console.log(err)
       }
@@ -32,6 +31,9 @@ export const PanelControl = () => {
     fetchData()
   }, [])
 
+  const teste = [] as {country: string, iso: string}[]
+  countriesData?.map((item) => { teste.push({country:item.country, iso: item.countryInfo.iso2})})
+  console.log("teste", teste)
 
   return (
     <Box display='flex' position='relative' bottom='20px' alignItems='center' justifyContent='center' gap='20px' >

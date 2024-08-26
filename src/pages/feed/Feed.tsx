@@ -21,7 +21,7 @@ export const Feed = () => {
 
   return (
     <Box display='flex' flexDirection='column' position='relative' bottom='20px' alignItems='center' justifyContent='center' gap='20px' >
-      {/* <TopPosts/> */}
+      <TopPosts posts={posts}/>
       <AllPosts posts={posts}/>
     </Box>
   )
