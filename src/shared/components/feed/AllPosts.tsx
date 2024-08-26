@@ -4,10 +4,8 @@ import {  Box } from '@mui/material'
 import {  iPostData } from '../../types'
 import ListIcon from '@mui/icons-material/List'
 import {
-  ArrowFooter,
   BodyCard,
   ContainerCard,
-  FooterCard,
   HeaderCard,
   Post,
   PostContainer

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import  { SelectChangeEvent } from '@mui/material/Select'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import { Box } from '@mui/material'
-import { CountryData } from '../../types'
 import { thousandPointFormat } from '../../helpers'
 import {
   ArrowFooter,
@@ -13,28 +12,39 @@ import {
 } from './styles'
 import LinearProgress from '@mui/material/LinearProgress'
 import { SelectCountries } from '../SelectCountries'
+import axios from 'axios'
 
 export const Deaths = (props: {
   deaths?: number
-  countriesData: CountryData[] | null
   loading: boolean
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [deathsCount, setDeathsCount] = useState(0 as number | undefined)
   const [country, setCountry] = useState('Global')
+  const loading = props.loading || isLoading
+
+  const fetchData = async (country: string) => {
+    setIsLoading(true)
+    try {
+      const urlString = `https://disease.sh/v3/covid-19/countries/${country}`
+      const countriesData = await axios.get(urlString)
+      setDeathsCount(countriesData?.data.deaths)
+    } catch (err) {
+      console.log(err)
+    }
+    setIsLoading(false)
+  }
 
   useEffect(() => {
     setDeathsCount(props?.deaths)
   }, [props.deaths])
 
-  const handleChangeCountry = (event: SelectChangeEvent) => {
+  const handleChangeCountry = async (event: SelectChangeEvent) => {
     setCountry(event.target.value)
     if (event.target.value === 'Global') {
       clearSelect()
-    } else if (props.countriesData) {
-      const countryInfo = props.countriesData.find(
-        item => item.country === event.target.value
-      )
-      setDeathsCount(countryInfo?.deaths)
+    } else {
+      await fetchData(event.target.value)
     }
   }
 
@@ -51,10 +61,10 @@ export const Deaths = (props: {
             <RemoveRedEyeOutlinedIcon />
             Deaths
           </div>
-          <SelectCountries handleChangeCountry={handleChangeCountry} clearSelect={clearSelect} loading={props.loading} country={country}/>
+          <SelectCountries handleChangeCountry={handleChangeCountry} clearSelect={clearSelect} loading={loading} country={country}/>
         </HeaderCard>
         <BodyCard>
-          {props.loading ? (
+          {loading ? (
             <LinearProgress />
           ) : (
             thousandPointFormat(deathsCount)

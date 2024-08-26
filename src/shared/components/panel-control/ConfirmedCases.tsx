@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import  { SelectChangeEvent } from '@mui/material/Select'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import { Box } from '@mui/material'
-import { CountryData } from '../../types'
 import { thousandPointFormat } from '../../helpers'
 import {
   ArrowFooter,
@@ -13,30 +12,41 @@ import {
 } from './styles'
 import LinearProgress from '@mui/material/LinearProgress';
 import { SelectCountries } from '../SelectCountries'
+import axios from 'axios'
 
 export const ConfirmedCases = (props: {
   confirmedCases?: number
-  countriesData: CountryData[] | null
   loading: boolean
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
   const [confirmedCasesCount, setConfirmedCasesCount] = useState(
     0 as number | undefined
   )
   const [country, setCountry] = useState('Global')
+  const loading = props.loading || isLoading
+
+  const fetchData = async (country: string) => {
+    setIsLoading(true)
+    try {
+      const urlString = `https://disease.sh/v3/covid-19/countries/${country}`
+      const countriesData = await axios.get(urlString)
+      setConfirmedCasesCount(countriesData?.data.cases)
+    } catch (err) {
+      console.log(err)
+    }
+    setIsLoading(false)
+  }
 
   useEffect(() => {
     setConfirmedCasesCount(props?.confirmedCases)
   }, [props.confirmedCases])
 
-  const handleChangeCountry = (event: SelectChangeEvent) => {
+  const handleChangeCountry = async (event: SelectChangeEvent) => {
     setCountry(event.target.value)
     if (event.target.value === 'Global') {
       clearSelect()
-    } else if (props.countriesData) {
-      const countryInfo = props.countriesData.find(
-        item => item.country === event.target.value
-      )
-      setConfirmedCasesCount(countryInfo?.cases)
+    } else {
+      await fetchData(event.target.value)
     }
   }
 
@@ -53,10 +63,10 @@ export const ConfirmedCases = (props: {
             <RemoveRedEyeOutlinedIcon />
             Confirmed cases
           </div>
-          <SelectCountries handleChangeCountry={handleChangeCountry} clearSelect={clearSelect} loading={props.loading} country={country}/>
+          <SelectCountries handleChangeCountry={handleChangeCountry} clearSelect={clearSelect} loading={loading} country={country}/>
         </HeaderCard>
         <BodyCard>
-          {props.loading ? (
+          {loading ? (
             <LinearProgress />
           ) : (
             thousandPointFormat(confirmedCasesCount)
