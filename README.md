@@ -17,20 +17,20 @@ Furthermore, we can filter posts related to the topic in different countries, di
 ### 1. Clone the repository:
 
 ``` 
-git clone https://github.com/your-username/covid19-data-monitoring.git
-cd covid19-data-monitoring
+git clone https://github.com/joaomed/covid-feed.git
+cd covid-feed
 ```
 
 ### 2. Install dependencies:
 
 ``` 
-npm install
+yarn install
 ```
 
 ### 3. Start the development server:
 
 ``` 
-npm start
+yarn start
 ```
 
 # Start Json Server
